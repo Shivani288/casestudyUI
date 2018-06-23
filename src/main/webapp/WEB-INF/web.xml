@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>servlet.ColumnCountValidation</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ValidationServlet</servlet-name>
+  	<display-name>ValidationServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.ValidationServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>greetings</servlet-name>
   	<url-pattern>/greetings</url-pattern>
@@ -33,5 +39,9 @@
   <servlet-mapping>
   	<servlet-name>ColumnCountValidation</servlet-name>
   	<url-pattern>/ColumnCountValidation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ValidationServlet</servlet-name>
+  	<url-pattern>/ValidationServlet</url-pattern>
   </servlet-mapping>
 </web-app>
