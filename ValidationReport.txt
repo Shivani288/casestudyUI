@@ -1,0 +1,264 @@
+....................................................................................
+Source Datasource: RDBMS		Destinaiton Datasource: RDBMS
+Source Database: library		Destinaiton Database: library
+Source User: root		Destinaiton User: root
+Source Table: books		Destinaiton Table: books
+
+
+
+
+
+
+Metadata Validation...............................................
+Validating Column Counts for source table and destination table...
+
+
+
+Column count matches in both table
+
+
+
+Validating Column Datatypes for source table and destination table...
+Detail of the columns which do not match:
+
+
+
+Source Table:					Target Table:
+
+
+
+All column data type matches in source table and destination tables
+....................................................................................
+Source Datasource: RDBMS		Destinaiton Datasource: RDBMS
+Source Database: insurance		Destinaiton Database: insurance
+Source User: root		Destinaiton User: root
+Source Table: family_member		Destinaiton Table: family_member
+
+
+
+
+
+
+Metadata Validation...............................................
+Validating Column Counts for source table and destination table...
+
+
+
+Column count matches in both table
+
+
+
+Validating Column Datatypes for source table and destination table...
+Detail of the columns which do not match:
+
+
+
+Source Table:					Target Table:
+
+
+
+All column data type matches in source table and destination tables
+....................................................................................
+Source Datasource: RDBMS		Destinaiton Datasource: RDBMS
+Source Database: insurance		Destinaiton Database: library
+Source User: root		Destinaiton User: root
+Source Table: family_member		Destinaiton Table: books
+
+
+
+
+
+
+Metadata Validation...............................................
+Validating Column Counts for source table and destination table...
+Source table has more columns. Details are given below
+
+
+
+Source Table:
+
+
+
+ID		INT
+Name		VARCHAR
+Phone		VARCHAR
+Email		VARCHAR
+DOB		DATE
+Username		VARCHAR
+Password		VARCHAR
+PAN		VARCHAR
+Aadhar		VARCHAR
+
+
+
+Target Table:
+
+
+
+Book_Id		VARCHAR
+Title		VARCHAR
+Author		VARCHAR
+price		INT
+Availibility		VARCHAR
+Publisher_Name		VARCHAR
+Publisher_Id		VARCHAR
+
+
+
+Validating Column Datatypes for source table and destination table...
+Detail of the columns which do not match:
+
+
+
+Source Table:					Target Table:
+ID			INT				Book_Id			VARCHAR
+Email		VARCHAR			price			INT
+DOB			DATE			Availibility	VARCHAR
+PAN			VARCHAR			-				-
+Aadhar		VARCHAR			-				-
+
+
+
+No of columns matches: 4
+No of columns do not matches: 5
+
+
+
+....................................................................................
+Source Datasource: RDBMS		Destinaiton Datasource: RDBMS
+Source Database: library		Destinaiton Database: insurance
+Source User: root		Destinaiton User: root
+Source Table: books		Destinaiton Table: family_member
+
+
+
+
+
+
+Metadata Validation...............................................
+Validating Column Counts for source table and destination table...
+
+
+
+Destination table has more columns. Details are given below
+
+
+
+Source Table:
+
+
+
+Book_Id		VARCHAR
+Title		VARCHAR
+Author		VARCHAR
+price		INT
+Availibility		VARCHAR
+Publisher_Name		VARCHAR
+Publisher_Id		VARCHAR
+
+
+
+Target Table:
+
+
+
+ID		INT
+Name		VARCHAR
+Phone		VARCHAR
+Email		VARCHAR
+DOB		DATE
+Username		VARCHAR
+Password		VARCHAR
+PAN		VARCHAR
+Aadhar		VARCHAR
+
+
+
+Validating Column Datatypes for source table and destination table...
+Detail of the columns which do not match:
+
+
+
+Source Table:					Target Table:
+Book_Id		VARCHAR			ID		INT
+price		INT			Email		VARCHAR
+Availibility		VARCHAR			DOB		DATE
+-		-			PAN		VARCHAR
+-		-			Aadhar		VARCHAR
+
+
+
+No of columns matches: 4
+No of columns do not matches: 5
+
+
+
+....................................................................................
+Source Datasource: RDBMS		Destinaiton Datasource: RDBMS
+Source Database: insurance		Destinaiton Database: insurance
+Source User: root		Destinaiton User: root
+Source Table: policy_list		Destinaiton Table: family_member
+
+
+
+
+
+
+Metadata Validation...............................................
+Validating Column Counts for source table and destination table...
+
+
+
+Destination table has more columns. Details are given below
+
+
+
+Source Table:
+
+
+
+ID		INT
+Policy_Number		VARCHAR
+Premium_Amount		INT
+Family_ID		INT
+Agent		VARCHAR
+Period		VARCHAR
+
+
+
+Target Table:
+
+
+
+ID		INT
+Name		VARCHAR
+Phone		VARCHAR
+Email		VARCHAR
+DOB		DATE
+Username		VARCHAR
+Password		VARCHAR
+PAN		VARCHAR
+Aadhar		VARCHAR
+
+
+
+Validating Column Datatypes for source table and destination table...
+Detail of the columns which do not match:
+
+
+
+Source Table:					Target Table:
+Premium_Amount		INT			Phone		VARCHAR
+Family_ID		INT			Email		VARCHAR
+Agent		VARCHAR			DOB		DATE
+-		-			Password		VARCHAR
+-		-			PAN		VARCHAR
+-		-			Aadhar		VARCHAR
+
+
+
+No of columns matches: 3
+No of columns do not matches: 6
+
+
+

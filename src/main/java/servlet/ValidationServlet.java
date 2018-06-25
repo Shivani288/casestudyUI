@@ -1,10 +1,14 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.impetus.mysqlValidator.*;
 
 public class ValidationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -14,10 +18,12 @@ public class ValidationServlet extends HttpServlet {
 	private String sourceUser;
 	private String targetUser;
 	private String sourcePassword;
-	private String targatPassword;
+	private String targetPassword;
 	private String sourceTable;
 	private String targetTable;
 	private String connection = "0";
+	Implementation implement;
+	GenerateReport gr;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +39,11 @@ public class ValidationServlet extends HttpServlet {
 		} else if (validationType.equals("rowByRowValiation")) {
 			rowByRowValiation(request, response);
 		} else if (validationType.equals("sampleValidation")) {
-			sampleValidation(request, response);
+			try {
+				sampleValidation(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} else if (validationType.equals("outputValidation")) {
 			outputValidation(request, response);
 		} else if (validationType.equals("assertValueValidation")) {
@@ -56,13 +66,22 @@ public class ValidationServlet extends HttpServlet {
 			targetDb = request.getParameter("targetDbName");
 			sourceUser = request.getParameter("sourceUser");
 			targetUser = request.getParameter("targetUser");
+			sourcePassword = request.getParameter("sourcePassword");
+			targetPassword = request.getParameter("targetPassword");
 			sourceTable = request.getParameter("sourceTable");
 			targetTable = request.getParameter("targetTable");
 
-			String result = "Connection established with source and target datasources.";
+			String result = "Connection established with source database " + sourceDb + " and target database "
+					+ targetDb + ".";
 
+			implement = new Implementation(sourceUser, sourcePassword, sourceDb, targetUser, targetPassword, targetDb);
+			gr = new GenerateReport();
+
+			implement.printConnectionReport(sourceType, targetType, sourceDb, targetDb, sourceUser, targetUser,
+					sourceTable, targetTable);
 			response.getWriter().write("<h3>" + result + "</h3>");
-		}else {
+			System.out.println(result);
+		} else {
 			response.getWriter().write("Already Connected");
 		}
 
@@ -70,12 +89,19 @@ public class ValidationServlet extends HttpServlet {
 
 	private void matchColumnCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		response.getWriter().write("Matching Column Count in source and destination tables");
+		StringBuilder result = new StringBuilder("<b>Matching Column Count in source and destination tables</b></br>");
+		implement.compareColumnCount(sourceTable, targetTable);
+		result.append("Report added to report file");
+		response.getWriter().write(result.toString());
 	}
 
 	private void matchColumnDataType(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		response.getWriter().write("Matching Column Datatypes in source and destination tables");
+		StringBuilder result = new StringBuilder(
+				"<b>Matching Columns Data Types in source and destination tables</b></br>");
+		implement.CompareDataType(sourceTable, targetTable);
+		result.append("Report added to report file");
+		response.getWriter().write(result.toString());
 	}
 
 	private void rowByRowValiation(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -83,10 +109,16 @@ public class ValidationServlet extends HttpServlet {
 		response.getWriter().write("Row by row validation in source and destination tables");
 	}
 
-	private void sampleValidation(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void sampleValidation(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 
-		String limit = request.getParameter("sampleLimit");
-		response.getWriter().write("Sample validation in source and destination tables with sample size " + limit);
+		int limit = Integer.parseInt(request.getParameter("sampleLimit"));
+		gr.writeToFile("Data Validation........................................");
+		gr.writeToFile("Validating Sample Data from source table and target tables...");
+		String result = "<b>Sample validation in source and destination tables with sample size " + limit+"</b>";
+		System.out.println("\n"+"Validating Sample Data from source table and target table...");
+		implement.validateSamples(sourceTable, targetTable, limit);
+		result = result + "<br>Validation is complete and report is added to report file.</br>";
+		response.getWriter().write(result);
 	}
 
 	private void outputValidation(HttpServletRequest request, HttpServletResponse response) throws IOException {
